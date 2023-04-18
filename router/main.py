@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from router.user1 import router as user
+from router.user import router as user
 from router.cart import router as cart
 from router.admin import router as admin
 from router.products import router as products

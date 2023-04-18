@@ -6,6 +6,7 @@ from bson import ObjectId
 from typing import List
 
 router = APIRouter(prefix="/api")
+# router = APIRouter()
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["Eshop"]
