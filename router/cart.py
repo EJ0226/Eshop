@@ -6,9 +6,9 @@ from pydantic import BaseModel, Field
 router = APIRouter()
 
 client = MongoClient("mongodb://localhost:27017/")
-db = client["fhsh_shop"]
+db = client["Eshop"]
 users = db["users"]
-items = db["items"]
+items = db["merchs"]
 
 class Cart(BaseModel):
     user_id: str
@@ -27,7 +27,7 @@ def get_user_cart(user_id):
     return cart["cart"]
 
 @router.post("/add-to-cart")
-async def add_to_cart(carts : Cart):
+async def cart(carts : Cart):
     item = items.find_one({"name": carts.item_name})
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -57,3 +57,4 @@ async def remove_from_cart(remove : Remove):
             return cart
     else:
         raise HTTPException(status_code=404, detail="Item not found in cart")
+        

@@ -17,25 +17,28 @@ class Item(BaseModel):
     summary : str
     price: int
     quantity: int
+    create_at:datetime = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
 
 @router.post("/create_item")
 async def create_item(create: Item):
     create_data = {
-        "name": create.name,
+        "searchKeyword": create.name,
         "summary": create.summary,
         "price": create.price,
-        "quantity": create.quantity
+        "quantity": create.quantity,
+        "create_at":create.create_at
     }
 
     result = items.insert_one(create_data)
 
     return {
         "id": str(result.inserted_id),
-        "name": create_data["name"],
+        "name": create_data["searchKeyword"],
         "summary": create_data["summary"],
         "price": create_data["price"],
-        "quantity": create_data["quantity"]
+        "quantity": create_data["quantity"],
+        "create_at":create_data["create_at"]
     }
 
 
